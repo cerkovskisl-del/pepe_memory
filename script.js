@@ -1,44 +1,44 @@
-// Pilna datu bāze ar taviem 24 Pepe variantiem un lokālajiem attēlu ceļiem
+// Pilna datu bāze ar taviem 24 Pepe variantiem (attēli tiek ņemti no tās pašas mapes)
 const allPepes = [
     // 1. Resna Pepe
-    { id: 'resna_normal', name: 'Resna Pepe', type: 'Normal', image: 'images/fat_normal.png' },
-    { id: 'resna_gold', name: 'Resna Pepe', type: 'Gold', image: 'images/fat_gold.png' },
-    { id: 'resna_cosmic', name: 'Resna Pepe', type: 'Cosmic', image: 'images/fat_cosmic.png' },
+    { id: 'resna_normal', name: 'Resna Pepe', type: 'Normal', image: 'fat_normal.png' },
+    { id: 'resna_gold', name: 'Resna Pepe', type: 'Gold', image: 'fat_gold.png' },
+    { id: 'resna_cosmic', name: 'Resna Pepe', type: 'Cosmic', image: 'fat_cosmic.png' },
 
     // 2. Bēdīga Pepe
-    { id: 'bediga_normal', name: 'Bēdīga Pepe', type: 'Normal', image: 'images/sad_normal.png' },
-    { id: 'bediga_gold', name: 'Bēdīga Pepe', type: 'Gold', image: 'images/sad_gold.png' },
-    { id: 'bediga_cosmic', name: 'Bēdīga Pepe', type: 'Cosmic', image: 'images/sad_cosmic.png' },
+    { id: 'bediga_normal', name: 'Bēdīga Pepe', type: 'Normal', image: 'sad_normal.png' },
+    { id: 'bediga_gold', name: 'Bēdīga Pepe', type: 'Gold', image: 'sad_gold.png' },
+    { id: 'bediga_cosmic', name: 'Bēdīga Pepe', type: 'Cosmic', image: 'sad_cosmic.png' },
 
     // 3. Ninjas Pepe
-    { id: 'ninja_normal', name: 'Ninjas Pepe', type: 'Normal', image: 'images/ninja_normal.png' },
-    { id: 'ninja_gold', name: 'Ninjas Pepe', type: 'Gold', image: 'images/ninja_gold.png' },
-    { id: 'ninja_cosmic', name: 'Ninjas Pepe', type: 'Cosmic', image: 'images/ninja_cosmic.png' },
+    { id: 'ninja_normal', name: 'Ninjas Pepe', type: 'Normal', image: 'ninja_normal.png' },
+    { id: 'ninja_gold', name: 'Ninjas Pepe', type: 'Gold', image: 'ninja_gold.png' },
+    { id: 'ninja_cosmic', name: 'Ninjas Pepe', type: 'Cosmic', image: 'ninja_cosmic.png' },
 
     // 4. Rich Pepe
-    { id: 'rich_normal', name: 'Rich Pepe', type: 'Normal', image: 'images/rich_normal.png' },
-    { id: 'rich_gold', name: 'Rich Pepe', type: 'Gold', image: 'images/rich_gold.png' },
-    { id: 'rich_cosmic', name: 'Rich Pepe', type: 'Cosmic', image: 'images/rich_cosmic.png' },
+    { id: 'rich_normal', name: 'Rich Pepe', type: 'Normal', image: 'rich_normal.png' },
+    { id: 'rich_gold', name: 'Rich Pepe', type: 'Gold', image: 'rich_gold.png' },
+    { id: 'rich_cosmic', name: 'Rich Pepe', type: 'Cosmic', image: 'rich_cosmic.png' },
 
     // 5. Poor Pepe
-    { id: 'poor_normal', name: 'Poor Pepe', type: 'Normal', image: 'images/poor_normal.png' },
-    { id: 'poor_gold', name: 'Poor Pepe', type: 'Gold', image: 'images/poor_gold.png' },
-    { id: 'poor_cosmic', name: 'Poor Pepe', type: 'Cosmic', image: 'images/poor_cosmic.png' },
+    { id: 'poor_normal', name: 'Poor Pepe', type: 'Normal', image: 'poor_normal.png' },
+    { id: 'poor_gold', name: 'Poor Pepe', type: 'Gold', image: 'poor_gold.png' },
+    { id: 'poor_cosmic', name: 'Poor Pepe', type: 'Cosmic', image: 'poor_cosmic.png' },
 
     // 6. Cyber Pepe
-    { id: 'cyber_normal', name: 'Cyber Pepe', type: 'Normal', image: 'images/cyber_normal.png' },
-    { id: 'cyber_gold', name: 'Cyber Pepe', type: 'Gold', image: 'images/cyber_gold.png' },
-    { id: 'cyber_cosmic', name: 'Cyber Pepe', type: 'Cosmic', image: 'images/cyber_cosmic.png' },
+    { id: 'cyber_normal', name: 'Cyber Pepe', type: 'Normal', image: 'cyber_normal.png' },
+    { id: 'cyber_gold', name: 'Cyber Pepe', type: 'Gold', image: 'cyber_gold.png' },
+    { id: 'cyber_cosmic', name: 'Cyber Pepe', type: 'Cosmic', image: 'cyber_cosmic.png' },
 
     // 7. Zombie Pepe
-    { id: 'zombie_normal', name: 'Zombie Pepe', type: 'Normal', image: 'images/zombie_normal.png' },
-    { id: 'zombie_gold', name: 'Zombie Pepe', type: 'Gold', image: 'images/zombie_gold.png' },
-    { id: 'zombie_cosmic', name: 'Zombie Pepe', type: 'Cosmic', image: 'images/zombie_cosmic.png' },
+    { id: 'zombie_normal', name: 'Zombie Pepe', type: 'Normal', image: 'zombie_normal.png' },
+    { id: 'zombie_gold', name: 'Zombie Pepe', type: 'Gold', image: 'zombie_gold.png' },
+    { id: 'zombie_cosmic', name: 'Zombie Pepe', type: 'Cosmic', image: 'zombie_cosmic.png' },
 
     // 8. God Pepe
-    { id: 'god_normal', name: 'God Pepe', type: 'Normal', image: 'images/god_normal.png' },
-    { id: 'god_gold', name: 'God Pepe', type: 'Gold', image: 'images/god_gold.png' },
-    { id: 'god_cosmic', name: 'God Pepe', type: 'Cosmic', image: 'images/god_cosmic.png' }
+    { id: 'god_normal', name: 'God Pepe', type: 'Normal', image: 'god_normal.png' },
+    { id: 'god_gold', name: 'God Pepe', type: 'Gold', image: 'god_gold.png' },
+    { id: 'god_cosmic', name: 'God Pepe', type: 'Cosmic', image: 'god_cosmic.png' }
 ];
 
 let cardsArray = [];
