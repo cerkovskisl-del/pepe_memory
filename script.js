@@ -46,21 +46,35 @@ let flippedCards = [];
 let moves = 0;
 let matches = 0;
 let lockBoard = false;
+let currentPairs = 8; // Noklusējuma līmenis: Vidējs (8 pāri / 16 kārtis)
 
 const gridContainer = document.getElementById('grid');
 const movesDisplay = document.getElementById('moves');
 const matchesDisplay = document.getElementById('matches');
+const totalMatchesDisplay = document.getElementById('total-matches');
 const resetBtn = document.getElementById('reset-btn');
+const diffButtons = document.querySelectorAll('.diff-btn');
 
-// Sagatavo 8 nejaušus pārus no 24 Pepe variantiem katrai spēlei
+// Sagatavo pārus atkarībā no izvēlētā grūtības līmeņa
 function prepareGameData() {
     const shuffledAll = [...allPepes].sort(() => Math.random() - 0.5);
-    const selectedPepes = shuffledAll.slice(0, 8); // Paņemam 8 unikālus Pepe
-    cardsArray = [...selectedPepes, ...selectedPepes]; // Dubultojam, lai sanāk 16 kārtis
+    const selectedPepes = shuffledAll.slice(0, currentPairs); // Paņem tik unikālus Pepe, cik prasa līmenis
+    cardsArray = [...selectedPepes, ...selectedPepes]; // Dubulto, lai sanāk pāri
 }
 
 function shuffle(array) {
     return array.sort(() => Math.random() - 0.5);
+}
+
+// Dinamiski pielāgo kolonnu skaitu vizuāli smukam izkārtojumam
+function adjustGridColumns() {
+    if (currentPairs === 4) {
+        gridContainer.style.gridTemplateColumns = 'repeat(4, 125px)'; // 4x2 Viegls
+    } else if (currentPairs === 8) {
+        gridContainer.style.gridTemplateColumns = 'repeat(4, 125px)'; // 4x4 Vidējs
+    } else if (currentPairs === 12) {
+        gridContainer.style.gridTemplateColumns = 'repeat(6, 125px)'; // 6x4 Grūts
+    }
 }
 
 // Ģenerē kāršu laukumu HTML struktūrā
@@ -68,6 +82,12 @@ function createBoard() {
     gridContainer.innerHTML = '';
     prepareGameData();
     shuffle(cardsArray);
+    adjustGridColumns();
+    
+    // Atjaunina kopējo pāru skaitu statistikas joslā
+    if (totalMatchesDisplay) {
+        totalMatchesDisplay.textContent = currentPairs;
+    }
 
     cardsArray.forEach((pepe, index) => {
         const card = document.createElement('div');
@@ -128,8 +148,8 @@ function checkMatch() {
         matchesDisplay.textContent = matches;
         flippedCards = [];
 
-        if (matches === 8) {
-            setTimeout(() => alert(`Apsveicu! Tu sakrāji visus pārus ar ${moves} gājieniem!`), 500);
+        if (matches === currentPairs) {
+            setTimeout(() => alert(`Apsveicu! Tu pabeidzi šo līmeni ar ${moves} gājieniem!`), 500);
         }
     } else {
         lockBoard = true;
@@ -151,6 +171,17 @@ function resetGame() {
     matchesDisplay.textContent = matches;
     createBoard();
 }
+
+// Noklausās klikšķus uz grūtības līmeņu pogām (ja tās ir pievienotas HTML)
+diffButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        diffButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        currentPairs = parseInt(this.dataset.pairs);
+        resetGame();
+    });
+});
 
 resetBtn.addEventListener('click', resetGame);
 createBoard();
