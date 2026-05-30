@@ -10,7 +10,37 @@ body {
 
 h1 {
     color: #2ecc71;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+/* Grūtības līmeņu pogu konteiners */
+.difficulty-container {
+    margin-bottom: 15px;
+}
+
+/* Grūtības līmeņu pogu stils */
+.diff-btn {
+    background-color: #34495e;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.diff-btn:hover {
+    background-color: #45627e;
+    transform: scale(1.02);
+}
+
+/* Izgaismotā (aktīvā) līmeņa poga */
+.diff-btn.active {
+    background-color: #2ecc71;
+    box-shadow: 0 0 8px rgba(46, 204, 113, 0.4);
 }
 
 .stats {
@@ -19,14 +49,13 @@ h1 {
     color: #bdc3c7;
 }
 
-/* 4x4 kāršu režģa izkārtojums */
+/* Dinamisks kāršu režģis - kolonnu skaitu kontrolē JavaScript */
 .game-grid {
     display: grid;
-    grid-template-columns: repeat(4, 130px);
     grid-gap: 12px;
     justify-content: center;
     margin: 0 auto;
-    max-width: 600px;
+    max-width: 900px;
 }
 
 /* Kārts pamata izskats (kad tā ir aizvērta) */
