@@ -9,8 +9,15 @@
 <body>
 
     <h1>Pepe Atmiņas Spēle</h1>
+    
+    <div class="difficulty-container">
+        <button class="diff-btn" data-pairs="4">Viegls (4 pāri)</button>
+        <button class="diff-btn active" data-pairs="8">Vidējs (8 pāri)</button>
+        <button class="diff-btn" data-pairs="12">Grūts (12 pāri)</button>
+    </div>
+
     <div class="stats">
-        Gājieni: <span id="moves">0</span> | Atrastie pāri: <span id="matches">0</span>/8
+        Gājieni: <span id="moves">0</span> | Atrastie pāri: <span id="matches">0</span>/<span id="total-matches">8</span>
     </div>
 
     <div class="game-grid" id="grid"></div>
