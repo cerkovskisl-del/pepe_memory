@@ -37,10 +37,23 @@ h1 {
     transform: scale(1.02);
 }
 
-/* Izgaismotā (aktīvā) līmeņa poga */
+/* Izgaismotā (aktīvā) līmeņa poga standarta līmeņiem */
 .diff-btn.active {
     background-color: #2ecc71;
     box-shadow: 0 0 8px rgba(46, 204, 113, 0.4);
+}
+
+/* Īpašs, pulsējošs stils Extreme pogai, kad tā ir aktīva */
+.diff-btn.extreme-btn.active {
+    background-color: #e74c3c;
+    box-shadow: 0 0 12px rgba(231, 76, 60, 0.6);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
 }
 
 .stats {
@@ -55,7 +68,8 @@ h1 {
     grid-gap: 12px;
     justify-content: center;
     margin: 0 auto;
-    max-width: 900px;
+    max-width: 1000px; /* Palielināts platums, lai ietilptu 8 kolonnas */
+    transition: all 0.3s ease;
 }
 
 /* Kārts pamata izskats (kad tā ir aizvērta) */
@@ -70,10 +84,16 @@ h1 {
     align-items: center;
     justify-content: center;
     border: 3px solid #34495e;
-    transition: transform 0.2s, background-color 0.2s;
+    transition: transform 0.2s, background-color 0.2s, width 0.2s, height 0.2s;
     user-select: none;
     box-sizing: border-box;
     padding: 5px;
+}
+
+/* Ja JavaScript aktivizē Extreme līmeni, samazinām kārtis uz 105px */
+.game-grid.extreme-grid .card {
+    width: 105px;
+    height: 105px;
 }
 
 .card:hover {
@@ -86,6 +106,11 @@ h1 {
     background-color: #ffffff;
     border-color: #2ecc71;
     transform: rotateY(180deg);
+}
+
+/* Kad ir aktivizēts Extreme līmenis, atrastie pāri iekrāsojas sarkani */
+.diff-btn.extreme-btn.active ~ .game-grid .card.matched {
+    border-color: #e74c3c;
 }
 
 /* Saturs kārts iekšpusē (bilde un teksts) */
@@ -102,11 +127,19 @@ h1 {
     height: 100%;
 }
 
+/* Standarta attēla izmērs kārtīs */
 .card img {
     width: 80px;
     height: 80px;
     object-fit: contain;
     margin-bottom: 5px;
+    transition: width 0.2s, height 0.2s;
+}
+
+/* Samazināts attēla izmērs Extreme kāršu režģī */
+.game-grid.extreme-grid .card img {
+    width: 60px;
+    height: 60px;
 }
 
 /* Parāda saturu tikai tad, kad kārts ir apgriezta */
