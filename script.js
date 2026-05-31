@@ -68,12 +68,18 @@ function shuffle(array) {
 
 // Dinamiski pielāgo kolonnu skaitu vizuāli smukam izkārtojumam
 function adjustGridColumns() {
+    // Noņemam speciālo klasi pirms katras pārbaudes
+    gridContainer.classList.remove('extreme-grid');
+
     if (currentPairs === 4) {
-        gridContainer.style.gridTemplateColumns = 'repeat(4, 125px)'; // 4x2 Viegls
+        gridContainer.style.gridTemplateColumns = 'repeat(4, 130px)'; // 4x2 Viegls
     } else if (currentPairs === 8) {
-        gridContainer.style.gridTemplateColumns = 'repeat(4, 125px)'; // 4x4 Vidējs
+        gridContainer.style.gridTemplateColumns = 'repeat(4, 130px)'; // 4x4 Vidējs
     } else if (currentPairs === 12) {
-        gridContainer.style.gridTemplateColumns = 'repeat(6, 125px)'; // 6x4 Grūts
+        gridContainer.style.gridTemplateColumns = 'repeat(6, 130px)'; // 6x4 Grūts
+    } else if (currentPairs === 24) {
+        gridContainer.classList.add('extreme-grid'); // Aktivizē mazāku kāršu stilu no CSS
+        gridContainer.style.gridTemplateColumns = 'repeat(8, 105px)'; // 8x6 EXTREME (48 kārtis)
     }
 }
 
@@ -149,7 +155,11 @@ function checkMatch() {
         flippedCards = [];
 
         if (matches === currentPairs) {
-            setTimeout(() => alert(`Apsveicu! Tu pabeidzi šo līmeni ar ${moves} gājieniem!`), 500);
+            if (currentPairs === 24) {
+                setTimeout(() => alert(`NEIEDOMĀJAMI! Tu atradi visus 24 pārus (48 kārtis) ar ${moves} gājieniem! Tu esi īsts leģendārais Pepe Meistars! 🏆🔥`), 500);
+            } else {
+                setTimeout(() => alert(`Apsveicu! Tu pabeidzi šo līmeni ar ${moves} gājieniem!`), 500);
+            }
         }
     } else {
         lockBoard = true;
