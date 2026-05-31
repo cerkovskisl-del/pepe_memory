@@ -1,209 +1,193 @@
-// Pilna datu bāze ar taviem 24 Pepe variantiem (attēli tiek ņemti no tās pašas mapes)
-const allPepes = [
-    // 1. Resna Pepe
-    { id: 'resna_normal', name: 'Resna Pepe', type: 'Normal', image: 'fat_normal.png' },
-    { id: 'resna_gold', name: 'Resna Pepe', type: 'Gold', image: 'fat_gold.png' },
-    { id: 'resna_cosmic', name: 'Resna Pepe', type: 'Cosmic', image: 'fat_cosmic.png' },
-
-    // 2. Bēdīga Pepe
-    { id: 'bediga_normal', name: 'Bēdīga Pepe', type: 'Normal', image: 'sad_normal.png' },
-    { id: 'bediga_gold', name: 'Bēdīga Pepe', type: 'Gold', image: 'sad_gold.png' },
-    { id: 'bediga_cosmic', name: 'Bēdīga Pepe', type: 'Cosmic', image: 'sad_cosmic.png' },
-
-    // 3. Ninjas Pepe
-    { id: 'ninja_normal', name: 'Ninjas Pepe', type: 'Normal', image: 'ninja_normal.png' },
-    { id: 'ninja_gold', name: 'Ninjas Pepe', type: 'Gold', image: 'ninja_gold.png' },
-    { id: 'ninja_cosmic', name: 'Ninjas Pepe', type: 'Cosmic', image: 'ninja_cosmic.png' },
-
-    // 4. Rich Pepe
-    { id: 'rich_normal', name: 'Rich Pepe', type: 'Normal', image: 'rich_normal.png' },
-    { id: 'rich_gold', name: 'Rich Pepe', type: 'Gold', image: 'rich_gold.png' },
-    { id: 'rich_cosmic', name: 'Rich Pepe', type: 'Cosmic', image: 'rich_cosmic.png' },
-
-    // 5. Poor Pepe
-    { id: 'poor_normal', name: 'Poor Pepe', type: 'Normal', image: 'poor_normal.png' },
-    { id: 'poor_gold', name: 'Poor Pepe', type: 'Gold', image: 'poor_gold.png' },
-    { id: 'poor_cosmic', name: 'Poor Pepe', type: 'Cosmic', image: 'poor_cosmic.png' },
-
-    // 6. Cyber Pepe
-    { id: 'cyber_normal', name: 'Cyber Pepe', type: 'Normal', image: 'cyber_normal.png' },
-    { id: 'cyber_gold', name: 'Cyber Pepe', type: 'Gold', image: 'cyber_gold.png' },
-    { id: 'cyber_cosmic', name: 'Cyber Pepe', type: 'Cosmic', image: 'cyber_cosmic.png' },
-
-    // 7. Zombie Pepe
-    { id: 'zombie_normal', name: 'Zombie Pepe', type: 'Normal', image: 'zombie_normal.png' },
-    { id: 'zombie_gold', name: 'Zombie Pepe', type: 'Gold', image: 'zombie_gold.png' },
-    { id: 'zombie_cosmic', name: 'Zombie Pepe', type: 'Cosmic', image: 'zombie_cosmic.png' },
-
-    // 8. God Pepe
-    { id: 'god_normal', name: 'God Pepe', type: 'Normal', image: 'god_normal.png' },
-    { id: 'god_gold', name: 'God Pepe', type: 'Gold', image: 'god_gold.png' },
-    { id: 'god_cosmic', name: 'God Pepe', type: 'Cosmic', image: 'god_cosmic.png' }
-];
-
-let cardsArray = [];
-let flippedCards = [];
-let moves = 0;
-let matches = 0;
-let lockBoard = false;
-let currentPairs = 8; // Noklusējuma līmenis: Vidējs
-
-const gridContainer = document.getElementById('grid');
-const movesDisplay = document.getElementById('moves');
-const matchesDisplay = document.getElementById('matches');
-const totalMatchesDisplay = document.getElementById('total-matches');
-const resetBtn = document.getElementById('reset-btn');
-const diffButtons = document.querySelectorAll('.diff-btn');
-
-// Sagatavo pārus atkarībā no izvēlētā grūtības līmeņa
-function prepareGameData() {
-    const shuffledAll = [...allPepes].sort(() => Math.random() - 0.5);
-    const selectedPepes = shuffledAll.slice(0, currentPairs); 
-    cardsArray = [...selectedPepes, ...selectedPepes]; 
+/* Globālais stils tīram un modernam izskatam */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a24;
+    color: #ffffff;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
 }
 
-function shuffle(array) {
-    return array.sort(() => Math.random() - 0.5);
+h1 {
+    color: #2ecc71;
+    margin-bottom: 15px;
 }
 
-// Dinamiski pielāgo kolonnu skaitu vizuāli smukam izkārtojumam
-function adjustGridColumns() {
-    gridContainer.classList.remove('extreme-grid');
-
-    if (currentPairs === 4) {
-        gridContainer.style.gridTemplateColumns = 'repeat(4, 130px)'; // 4x2 Viegls
-    } else if (currentPairs === 8) {
-        gridContainer.style.gridTemplateColumns = 'repeat(4, 130px)'; // 4x4 Vidējs
-    } else if (currentPairs === 12) {
-        gridContainer.style.gridTemplateColumns = 'repeat(6, 130px)'; // 6x4 Grūts
-    } else if (currentPairs === 24) {
-        gridContainer.classList.add('extreme-grid'); 
-        gridContainer.style.gridTemplateColumns = 'repeat(8, 105px)'; // 8x6 EXTREME (48 kārtis)
-    }
+/* Valodu pogu stils */
+.language-container {
+    margin-bottom: 20px;
+    text-align: right;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-// Ģenerē kāršu laukumu HTML struktūrā
-function createBoard() {
-    gridContainer.innerHTML = '';
-    prepareGameData();
-    shuffle(cardsArray);
-    adjustGridColumns();
-    
-    if (totalMatchesDisplay) {
-        totalMatchesDisplay.textContent = currentPairs;
-    }
-
-    cardsArray.forEach((pepe, index) => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.dataset.pepeId = pepe.id;
-        card.dataset.index = index;
-
-        const content = document.createElement('div');
-        content.classList.add('card-content');
-
-        const img = document.createElement('img');
-        img.src = pepe.image;
-
-        const textName = document.createElement('span');
-        textName.textContent = pepe.name;
-
-        const textType = document.createElement('span');
-        textType.textContent = `[${pepe.type}]`;
-        
-        if(pepe.type === 'Gold') textType.style.color = '#d4af37';
-        if(pepe.type === 'Cosmic') textType.style.color = '#8a2be2';
-        if(pepe.type === 'Normal') textType.style.color = '#555555';
-
-        content.appendChild(img);
-        content.appendChild(textName);
-        content.appendChild(textType);
-        card.appendChild(content);
-
-        card.addEventListener('click', flipCard);
-        gridContainer.appendChild(card);
-    });
+.lang-btn {
+    background-color: #2c3e50;
+    color: #fff;
+    border: 2px solid #34495e;
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 12px;
+    transition: background-color 0.2s;
 }
 
-function flipCard() {
-    if (lockBoard) return;
-    if (this.classList.contains('flipped') || this.classList.contains('matched')) return;
-    if (flippedCards.length === 1 && flippedCards[0].dataset.index === this.dataset.index) return;
-
-    this.classList.add('flipped');
-    flippedCards.push(this);
-
-    if (flippedCards.length === 2) {
-        moves++;
-        movesDisplay.textContent = moves;
-        checkMatch();
-    }
+.lang-btn:hover {
+    background-color: #34495e;
 }
 
-function checkMatch() {
-    const [card1, card2] = flippedCards;
-
-    if (card1.dataset.pepeId === card2.dataset.pepeId) {
-        card1.classList.add('matched');
-        card2.classList.add('matched');
-        matches++;
-        matchesDisplay.textContent = matches;
-        flippedCards = [];
-
-        if (matches === currentPairs) {
-            showWinAlert();
-        }
-    } else {
-        lockBoard = true;
-        setTimeout(() => {
-            card1.classList.remove('flipped');
-            card2.classList.remove('flipped');
-            flippedCards = [];
-            lockBoard = false;
-        }, 1000);
-    }
+.lang-btn.active {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
 }
 
-// Funkcija, kas izvada uzvaras paziņojumu trīs valodās
-function showWinAlert() {
-    let message = "";
-
-    if (currentPairs === 24) {
-        // Īpašais paziņojums Extreme līmenim
-        message = 
-            `LV: NEIEDOMĀJAMI! Tu pieveici EXTREME līmeni ar ${moves} gājieniem! Tu esi īsts Pepe Dievs! 🏆🔥\n\n` +
-            `RU: НЕВЕРОЯТНО! Ты прошёл EXTREME уровень за ${moves} ходов! Ты настоящий Бог Пепе! 🏆🔥\n\n` +
-            `EN: UNBELIEVABLE! You completed the EXTREME level in ${moves} moves! You are a true Pepe God! 🏆🔥`;
-    } else {
-        // Standarta paziņojums pārējiem līmeņiem
-        message = 
-            `LV: Apsveicu! Tu pabeidzi šo līmeni ar ${moves} gājieniem!\n\n` +
-            `RU: Поздравляем! Вы прошли этот уровень за ${moves} ходов!\n\n` +
-            `EN: Congratulations! You completed this level in ${moves} moves!`;
-    }
-
-    setTimeout(() => alert(message), 500);
+/* Grūtības līmeņu pogu konteiners */
+.difficulty-container {
+    margin-bottom: 15px;
 }
 
-function resetGame() {
-    moves = 0;
-    matches = 0;
-    flippedCards = [];
-    lockBoard = false;
-    movesDisplay.textContent = moves;
-    matchesDisplay.textContent = matches;
-    createBoard();
+/* Grūtības līmeņu pogu stils */
+.diff-btn {
+    background-color: #34495e;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s, transform 0.1s;
 }
 
-diffButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        diffButtons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        
-        currentPairs = parseInt(this.dataset.pairs);
-        resetGame();
-    });
-});
+.diff-btn:hover {
+    background-color: #45627e;
+    transform: scale(1.02);
+}
 
-resetBtn.addEventListener('click', resetGame);
-createBoard();
+.diff-btn.active {
+    background-color: #2ecc71;
+    box-shadow: 0 0 8px rgba(46, 204, 113, 0.4);
+}
+
+.diff-btn.extreme-btn.active {
+    background-color: #e74c3c;
+    box-shadow: 0 0 12px rgba(231, 76, 60, 0.6);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+.stats {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #bdc3c7;
+}
+
+/* Pamata režģis – tagad tas vienmēr piespiedu kārtā strādās kā režģis */
+.game-grid {
+    display: grid !important; 
+    grid-gap: 12px;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1100px;
+}
+
+/* Kārts pamata izskats (aizvērta) */
+.card {
+    width: 130px;
+    height: 130px;
+    background-color: #2c3e50;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #34495e;
+    transition: transform 0.2s, background-color 0.2s;
+    user-select: none;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+/* Extreme izmēru samazināšana grid līmenī */
+.game-grid.extreme-grid {
+    grid-gap: 8px;
+}
+
+.game-grid.extreme-grid .card {
+    width: 105px;
+    height: 105px;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    background-color: #34495e;
+}
+
+.card.flipped, .card.matched {
+    background-color: #ffffff;
+    border-color: #2ecc71;
+    transform: rotateY(180deg);
+}
+
+.diff-btn.extreme-btn.active ~ .game-grid .card.matched {
+    border-color: #e74c3c;
+}
+
+/* Kārts saturs */
+.card .card-content {
+    display: none;
+    text-align: center;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.game-grid.extreme-grid .card img {
+    width: 55px;
+    height: 55px;
+}
+
+.card.flipped .card-content, .card.matched .card-content {
+    display: flex;
+    transform: rotateY(180deg);
+}
+
+/* Restartēšanas poga */
+.reset-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 25px;
+    transition: background-color 0.2s;
+}
+
+.reset-btn:hover {
+    background-color: #27ae60;
+}
