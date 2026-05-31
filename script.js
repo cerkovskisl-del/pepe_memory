@@ -1,52 +1,78 @@
-// Pilna datu bāze ar taviem 24 Pepe variantiem (attēli tiek ņemti no tās pašas mapes)
+// Pepe datu bāze (Ar tulkojumiem katram tēlam un tipam)
 const allPepes = [
-    // 1. Resna Pepe
-    { id: 'resna_normal', name: 'Resna Pepe', type: 'Normal', image: 'fat_normal.png' },
-    { id: 'resna_gold', name: 'Resna Pepe', type: 'Gold', image: 'fat_gold.png' },
-    { id: 'resna_cosmic', name: 'Resna Pepe', type: 'Cosmic', image: 'fat_cosmic.png' },
-
-    // 2. Bēdīga Pepe
-    { id: 'bediga_normal', name: 'Bēdīga Pepe', type: 'Normal', image: 'sad_normal.png' },
-    { id: 'bediga_gold', name: 'Bēdīga Pepe', type: 'Gold', image: 'sad_gold.png' },
-    { id: 'bediga_cosmic', name: 'Bēdīga Pepe', type: 'Cosmic', image: 'sad_cosmic.png' },
-
-    // 3. Ninjas Pepe
-    { id: 'ninja_normal', name: 'Ninjas Pepe', type: 'Normal', image: 'ninja_normal.png' },
-    { id: 'ninja_gold', name: 'Ninjas Pepe', type: 'Gold', image: 'ninja_gold.png' },
-    { id: 'ninja_cosmic', name: 'Ninjas Pepe', type: 'Cosmic', image: 'ninja_cosmic.png' },
-
-    // 4. Rich Pepe
-    { id: 'rich_normal', name: 'Rich Pepe', type: 'Normal', image: 'rich_normal.png' },
-    { id: 'rich_gold', name: 'Rich Pepe', type: 'Gold', image: 'rich_gold.png' },
-    { id: 'rich_cosmic', name: 'Rich Pepe', type: 'Cosmic', image: 'rich_cosmic.png' },
-
-    // 5. Poor Pepe
-    { id: 'poor_normal', name: 'Poor Pepe', type: 'Normal', image: 'poor_normal.png' },
-    { id: 'poor_gold', name: 'Poor Pepe', type: 'Gold', image: 'poor_gold.png' },
-    { id: 'poor_cosmic', name: 'Poor Pepe', type: 'Cosmic', image: 'poor_cosmic.png' },
-
-    // 6. Cyber Pepe
-    { id: 'cyber_normal', name: 'Cyber Pepe', type: 'Normal', image: 'cyber_normal.png' },
-    { id: 'cyber_gold', name: 'Cyber Pepe', type: 'Gold', image: 'cyber_gold.png' },
-    { id: 'cyber_cosmic', name: 'Cyber Pepe', type: 'Cosmic', image: 'cyber_cosmic.png' },
-
-    // 7. Zombie Pepe
-    { id: 'zombie_normal', name: 'Zombie Pepe', type: 'Normal', image: 'zombie_normal.png' },
-    { id: 'zombie_gold', name: 'Zombie Pepe', type: 'Gold', image: 'zombie_gold.png' },
-    { id: 'zombie_cosmic', name: 'Zombie Pepe', type: 'Cosmic', image: 'zombie_cosmic.png' },
-
-    // 8. God Pepe
-    { id: 'god_normal', name: 'God Pepe', type: 'Normal', image: 'god_normal.png' },
-    { id: 'god_gold', name: 'God Pepe', type: 'Gold', image: 'god_gold.png' },
-    { id: 'god_cosmic', name: 'God Pepe', type: 'Cosmic', image: 'god_cosmic.png' }
+    { id: 'resna_normal', name: { lv: 'Resna Pepe', en: 'Fat Pepe', ru: 'Толстый Пепе' }, type: 'Normal', image: 'fat_normal.png' },
+    { id: 'resna_gold', name: { lv: 'Resna Pepe', en: 'Fat Pepe', ru: 'Толстый Пепе' }, type: 'Gold', image: 'fat_gold.png' },
+    { id: 'resna_cosmic', name: { lv: 'Resna Pepe', en: 'Fat Pepe', ru: 'Толстый Пепе' }, type: 'Cosmic', image: 'fat_cosmic.png' },
+    { id: 'bediga_normal', name: { lv: 'Bēdīga Pepe', en: 'Sad Pepe', ru: 'Грустный Пепе' }, type: 'Normal', image: 'sad_normal.png' },
+    { id: 'bediga_gold', name: { lv: 'Bēdīga Pepe', en: 'Sad Pepe', ru: 'Грустный Пепе' }, type: 'Gold', image: 'sad_gold.png' },
+    { id: 'bediga_cosmic', name: { lv: 'Bēdīga Pepe', en: 'Sad Pepe', ru: 'Грустный Пепе' }, type: 'Cosmic', image: 'sad_cosmic.png' },
+    { id: 'ninja_normal', name: { lv: 'Ninjas Pepe', en: 'Ninja Pepe', ru: 'Ниндзя Пепе' }, type: 'Normal', image: 'ninja_normal.png' },
+    { id: 'ninja_gold', name: { lv: 'Ninjas Pepe', en: 'Ninja Pepe', ru: 'Ниндзя Пепе' }, type: 'Gold', image: 'ninja_gold.png' },
+    { id: 'ninja_cosmic', name: { lv: 'Ninjas Pepe', en: 'Ninja Pepe', ru: 'Ниндзя Пепе' }, type: 'Cosmic', image: 'ninja_cosmic.png' },
+    { id: 'rich_normal', name: { lv: 'Rich Pepe', en: 'Rich Pepe', ru: 'Богатый Пепе' }, type: 'Normal', image: 'rich_normal.png' },
+    { id: 'rich_gold', name: { lv: 'Rich Pepe', en: 'Rich Pepe', ru: 'Богатый Пепе' }, type: 'Gold', image: 'rich_gold.png' },
+    { id: 'rich_cosmic', name: { lv: 'Rich Pepe', en: 'Rich Pepe', ru: 'Богатый Пепе' }, type: 'Cosmic', image: 'rich_cosmic.png' },
+    { id: 'poor_normal', name: { lv: 'Poor Pepe', en: 'Poor Pepe', ru: 'Бедный Пепе' }, type: 'Normal', image: 'poor_normal.png' },
+    { id: 'poor_gold', name: { lv: 'Poor Pepe', en: 'Poor Pepe', ru: 'Бедный Пепе' }, type: 'Gold', image: 'poor_gold.png' },
+    { id: 'poor_cosmic', name: { lv: 'Poor Pepe', en: 'Poor Pepe', ru: 'Бедный Пепе' }, type: 'Cosmic', image: 'poor_cosmic.png' },
+    { id: 'cyber_normal', name: { lv: 'Cyber Pepe', en: 'Cyber Pepe', ru: 'Кибер Пепе' }, type: 'Normal', image: 'cyber_normal.png' },
+    { id: 'cyber_gold', name: { lv: 'Cyber Pepe', en: 'Cyber Pepe', ru: 'Кибер Пепе' }, type: 'Gold', image: 'cyber_gold.png' },
+    { id: 'cyber_cosmic', name: { lv: 'Cyber Pepe', en: 'Cyber Pepe', ru: 'Кибер Пепе' }, type: 'Cosmic', image: 'cyber_cosmic.png' },
+    { id: 'zombie_normal', name: { lv: 'Zombie Pepe', en: 'Zombie Pepe', ru: 'Зомби Пепе' }, type: 'Normal', image: 'zombie_normal.png' },
+    { id: 'zombie_gold', name: { lv: 'Zombie Pepe', en: 'Zombie Pepe', ru: 'Зомби Пепе' }, type: 'Gold', image: 'zombie_gold.png' },
+    { id: 'zombie_cosmic', name: { lv: 'Zombie Pepe', en: 'Zombie Pepe', ru: 'Зомби Пепе' }, type: 'Cosmic', image: 'zombie_cosmic.png' },
+    { id: 'god_normal', name: { lv: 'God Pepe', en: 'God Pepe', ru: 'Бог Пепе' }, type: 'Normal', image: 'god_normal.png' },
+    { id: 'god_gold', name: { lv: 'God Pepe', en: 'God Pepe', ru: 'Бог Пепе' }, type: 'Gold', image: 'god_gold.png' },
+    { id: 'god_cosmic', name: { lv: 'God Pepe', en: 'God Pepe', ru: 'Бог Пепе' }, type: 'Cosmic', image: 'god_cosmic.png' }
 ];
 
+// Valodu vārdnīca interfeisam
+const translations = {
+    lv: {
+        title: "Pepe Atmiņas Spēle",
+        easy: "Viegls (4 pāri)",
+        medium: "Vidējs (8 pāri)",
+        hard: "Grūts (12 pāri)",
+        extreme: "Extreme (24 pāri)",
+        moves: "Gājieni",
+        matches: "Atrastie pāri",
+        reset: "Sākt no jauna",
+        winNormal: "Apsveicu! Tu pabeidzi šo līmeni ar {moves} gājieniem!",
+        winExtreme: "NEIEDOMĀJAMI! Tu pieveici EXTREME līmeni ar {moves} gājieniem! Tu esi īsts Pepe Dievs! 🏆🔥"
+    },
+    en: {
+        title: "Pepe Memory Game",
+        easy: "Easy (4 pairs)",
+        medium: "Medium (8 pairs)",
+        hard: "Hard (12 pairs)",
+        extreme: "Extreme (24 pairs)",
+        moves: "Moves",
+        matches: "Pairs found",
+        reset: "Reset Game",
+        winNormal: "Congratulations! You completed this level in {moves} moves!",
+        winExtreme: "UNBELIEVABLE! You completed the EXTREME level in {moves} moves! You are a true Pepe God! 🏆🔥"
+    },
+    ru: {
+        title: "Пепе Игра Мемори",
+        easy: "Легкий (4 пары)",
+        medium: "Средний (8 пары)",
+        hard: "Тяжелый (12 пар)",
+        extreme: "Экстрим (24 пары)",
+        moves: "Ходы",
+        matches: "Найденные пары",
+        reset: "Начать заново",
+        winNormal: "Поздравляем! Вы прошли этот уровень за {moves} ходов!",
+        winExtreme: "НЕВЕРОЯТНО! Ты прошёл EXTREME уровень за {moves} ходов! Ты настоящий Бог Пепе! 🏆🔥"
+    }
+};
+
+let currentLang = 'lv'; // Noklusējuma valoda
 let cardsArray = [];
 let flippedCards = [];
 let moves = 0;
 let matches = 0;
 let lockBoard = false;
-let currentPairs = 8; // Noklusējuma līmenis: Vidējs (8 pāri / 16 kārtis)
+let currentPairs = 8; 
 
 const gridContainer = document.getElementById('grid');
 const movesDisplay = document.getElementById('moves');
@@ -54,43 +80,53 @@ const matchesDisplay = document.getElementById('matches');
 const totalMatchesDisplay = document.getElementById('total-matches');
 const resetBtn = document.getElementById('reset-btn');
 const diffButtons = document.querySelectorAll('.diff-btn');
+const langButtons = document.querySelectorAll('.lang-btn');
 
-// Sagatavo pārus atkarībā no izvēlētā grūtības līmeņa
+function updateInterfaceLanguage() {
+    const t = translations[currentLang];
+    document.getElementById('game-title').textContent = t.title;
+    document.getElementById('btn-easy').textContent = t.easy;
+    document.getElementById('btn-medium').textContent = t.medium;
+    document.getElementById('btn-hard').textContent = t.hard;
+    document.getElementById('btn-extreme').textContent = t.extreme;
+    document.getElementById('text-moves').textContent = t.moves;
+    document.getElementById('text-matches').textContent = t.matches;
+    resetBtn.textContent = t.reset;
+}
+
 function prepareGameData() {
     const shuffledAll = [...allPepes].sort(() => Math.random() - 0.5);
-    const selectedPepes = shuffledAll.slice(0, currentPairs); // Paņem tik unikālus Pepe, cik prasa līmenis
-    cardsArray = [...selectedPepes, ...selectedPepes]; // Dubulto, lai sanāk pāri
+    const selectedPepes = shuffledAll.slice(0, currentPairs); 
+    cardsArray = [...selectedPepes, ...selectedPepes]; 
 }
 
 function shuffle(array) {
     return array.sort(() => Math.random() - 0.5);
 }
 
-// Dinamiski pielāgo kolonnu skaitu vizuāli smukam izkārtojumam
+// Režģa salabošana: kolonnu platumi tagad tiek rakstīti caur pareizo CSS loģiku
 function adjustGridColumns() {
-    // Noņemam speciālo klasi pirms katras pārbaudes
     gridContainer.classList.remove('extreme-grid');
 
     if (currentPairs === 4) {
-        gridContainer.style.gridTemplateColumns = 'repeat(4, 130px)'; // 4x2 Viegls
+        gridContainer.style.gridTemplateColumns = 'repeat(4, 130px)'; 
     } else if (currentPairs === 8) {
-        gridContainer.style.gridTemplateColumns = 'repeat(4, 130px)'; // 4x4 Vidējs
+        gridContainer.style.gridTemplateColumns = 'repeat(4, 130px)'; 
     } else if (currentPairs === 12) {
-        gridContainer.style.gridTemplateColumns = 'repeat(6, 130px)'; // 6x4 Grūts
+        gridContainer.style.gridTemplateColumns = 'repeat(6, 130px)'; 
     } else if (currentPairs === 24) {
-        gridContainer.classList.add('extreme-grid'); // Aktivizē mazāku kāršu stilu no CSS
-        gridContainer.style.gridTemplateColumns = 'repeat(8, 105px)'; // 8x6 EXTREME (48 kārtis)
+        gridContainer.classList.add('extreme-grid'); 
+        gridContainer.style.gridTemplateColumns = 'repeat(8, 105px)'; 
     }
 }
 
-// Ģenerē kāršu laukumu HTML struktūrā
 function createBoard() {
     gridContainer.innerHTML = '';
     prepareGameData();
     shuffle(cardsArray);
     adjustGridColumns();
+    updateInterfaceLanguage();
     
-    // Atjaunina kopējo pāru skaitu statistikas joslā
     if (totalMatchesDisplay) {
         totalMatchesDisplay.textContent = currentPairs;
     }
@@ -108,12 +144,12 @@ function createBoard() {
         img.src = pepe.image;
 
         const textName = document.createElement('span');
-        textName.textContent = pepe.name;
+        // Dinamiski paņem tekstu izvēlētajā valodā
+        textName.textContent = pepe.name[currentLang];
 
         const textType = document.createElement('span');
         textType.textContent = `[${pepe.type}]`;
         
-        // Pievieno krāsu akcentu tekstam atkarībā no stila
         if(pepe.type === 'Gold') textType.style.color = '#d4af37';
         if(pepe.type === 'Cosmic') textType.style.color = '#8a2be2';
         if(pepe.type === 'Normal') textType.style.color = '#555555';
@@ -146,7 +182,6 @@ function flipCard() {
 function checkMatch() {
     const [card1, card2] = flippedCards;
 
-    // Pārbauda, vai abām kārtīm pilnībā sakrīt Pepe ID un stils
     if (card1.dataset.pepeId === card2.dataset.pepeId) {
         card1.classList.add('matched');
         card2.classList.add('matched');
@@ -155,11 +190,10 @@ function checkMatch() {
         flippedCards = [];
 
         if (matches === currentPairs) {
-            if (currentPairs === 24) {
-                setTimeout(() => alert(`NEIEDOMĀJAMI! Tu atradi visus 24 pārus (48 kārtis) ar ${moves} gājieniem! Tu esi īsts leģendārais Pepe Meistars! 🏆🔥`), 500);
-            } else {
-                setTimeout(() => alert(`Apsveicu! Tu pabeidzi šo līmeni ar ${moves} gājieniem!`), 500);
-            }
+            const t = translations[currentLang];
+            let alertMsg = (currentPairs === 24) ? t.winExtreme : t.winNormal;
+            alertMsg = alertMsg.replace("{moves}", moves);
+            setTimeout(() => alert(alertMsg), 500);
         }
     } else {
         lockBoard = true;
@@ -182,7 +216,7 @@ function resetGame() {
     createBoard();
 }
 
-// Noklausās klikšķus uz grūtības līmeņu pogām (ja tās ir pievienotas HTML)
+// Līmeņu pogu klikšķi
 diffButtons.forEach(button => {
     button.addEventListener('click', function() {
         diffButtons.forEach(btn => btn.classList.remove('active'));
@@ -190,6 +224,27 @@ diffButtons.forEach(button => {
         
         currentPairs = parseInt(this.dataset.pairs);
         resetGame();
+    });
+});
+
+// Valodu pogu klikšķi
+langButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        langButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        currentLang = this.dataset.lang;
+        
+        // Pārtulko atvērtās un neatvērtās kārtis bez spēles progresa nodēšanas!
+        updateInterfaceLanguage();
+        const cardElements = gridContainer.querySelectorAll('.card');
+        cardElements.forEach((cardElement, idx) => {
+            const pepeData = cardsArray[idx];
+            const nameSpan = cardElement.querySelector('.card-content span:nth-of-type(1)');
+            if (nameSpan) {
+                nameSpan.textContent = pepeData.name[currentLang];
+            }
+        });
     });
 });
 
