@@ -66,7 +66,7 @@ const translations = {
     }
 };
 
-let currentLang = 'lv'; // Noklusējuma valoda
+let currentLang = 'lv'; 
 let cardsArray = [];
 let flippedCards = [];
 let moves = 0;
@@ -104,19 +104,23 @@ function shuffle(array) {
     return array.sort(() => Math.random() - 0.5);
 }
 
-// Režģa salabošana: kolonnu platumi tagad tiek rakstīti caur pareizo CSS loģiku
+// Responsīva režģa pielāgošana mobilajām ierīcēm (Aizstāti fiksētie pikseļi ar flex/fraction daļām)
 function adjustGridColumns() {
     gridContainer.classList.remove('extreme-grid');
 
     if (currentPairs === 4) {
-        gridContainer.style.gridTemplateColumns = 'repeat(4, 130px)'; 
+        gridContainer.style.gridTemplateColumns = 'repeat(4, 1fr)'; 
+        gridContainer.style.maxWidth = '600px';
     } else if (currentPairs === 8) {
-        gridContainer.style.gridTemplateColumns = 'repeat(4, 130px)'; 
+        gridContainer.style.gridTemplateColumns = 'repeat(4, 1fr)'; 
+        gridContainer.style.maxWidth = '600px';
     } else if (currentPairs === 12) {
-        gridContainer.style.gridTemplateColumns = 'repeat(6, 130px)'; 
+        gridContainer.style.gridTemplateColumns = 'repeat(6, 1fr)'; 
+        gridContainer.style.maxWidth = '900px';
     } else if (currentPairs === 24) {
         gridContainer.classList.add('extreme-grid'); 
-        gridContainer.style.gridTemplateColumns = 'repeat(8, 105px)'; 
+        gridContainer.style.gridTemplateColumns = 'repeat(8, 1fr)'; 
+        gridContainer.style.maxWidth = '1000px';
     }
 }
 
@@ -144,7 +148,6 @@ function createBoard() {
         img.src = pepe.image;
 
         const textName = document.createElement('span');
-        // Dinamiski paņem tekstu izvēlētajā valodā
         textName.textContent = pepe.name[currentLang];
 
         const textType = document.createElement('span');
@@ -216,7 +219,6 @@ function resetGame() {
     createBoard();
 }
 
-// Līmeņu pogu klikšķi
 diffButtons.forEach(button => {
     button.addEventListener('click', function() {
         diffButtons.forEach(btn => btn.classList.remove('active'));
@@ -227,7 +229,6 @@ diffButtons.forEach(button => {
     });
 });
 
-// Valodu pogu klikšķi
 langButtons.forEach(button => {
     button.addEventListener('click', function() {
         langButtons.forEach(btn => btn.classList.remove('active'));
@@ -235,7 +236,6 @@ langButtons.forEach(button => {
         
         currentLang = this.dataset.lang;
         
-        // Pārtulko atvērtās un neatvērtās kārtis bez spēles progresa nodēšanas!
         updateInterfaceLanguage();
         const cardElements = gridContainer.querySelectorAll('.card');
         cardElements.forEach((cardElement, idx) => {
